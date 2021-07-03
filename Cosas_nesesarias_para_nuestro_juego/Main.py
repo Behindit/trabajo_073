@@ -25,6 +25,7 @@ run=True
 while run:
     
     ventana.fill(negro)
+    ventana.blit(fondo,[0,0])
     
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
@@ -37,11 +38,13 @@ while run:
             print("click3")
         if event.type==pygame.MOUSEBUTTONDOWN and event.button==1 and salir.collidepoint(pygame.mouse.get_pos()):
             run=False
+            
     #dibujar pantalla
     crear_boton(ventana,jugar,"Jugar")
     crear_boton(ventana,opciones,"Opciones")
     crear_boton(ventana,extras,"Extras")
     crear_boton(ventana,salir,"Salir")
+    
 
     
     pygame.display.flip()

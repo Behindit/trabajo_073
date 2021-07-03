@@ -23,6 +23,29 @@ def escribir_texto_time(pantalla,localizacion,texto,tamaño):
     ren2=fuente1.render(texto,True,(0,0,0))
     pantalla.blit(ren2,((localizacion[0]-(ren2.get_width()/2)),(localizacion[1]-(ren2.get_height()/2))))
 
+def detectar_colision(tecla,movx,movy,lista1):
+    
+        if tecla=="w":
+            if movy==0 or lista1[movx][movy-1][2]==1:
+                return 0
+            else:
+                return "w"
+        if tecla=="a":
+            if movx==0 or lista1[movx-1][movy][2]==1:
+                return 0
+            else:
+                return "a"
+        if tecla=="s":
+            if movy==9 or lista1[movx][movy+1][2]==1:
+                return 0
+            else:
+                return "s"
+        if tecla=="d":
+            if movx==9 or lista1[movx+1][movy][2]==1:
+                return 0
+            else:
+                return "d"
+
 #juego
 def ejecucion_juego(ventana):
     final_final=0
@@ -44,7 +67,7 @@ def ejecucion_juego(ventana):
             lista1[i].append([x,y,0])
 
 # * ------- OBSTACULOS ------- * #
-    obstaculo_pos=[(random.randint(2,8)),(random.randint(2,8))]
+    obstaculo_pos=[(random.randint(2,9)),(random.randint(2,9))]
 
     obstaculo2_pos=[(random.randint(2,9)),(random.randint(2,9))]
     obstaculo2_1_pos=[obstaculo2_pos[0],obstaculo2_pos[1]-1]
@@ -58,22 +81,20 @@ def ejecucion_juego(ventana):
     obstaculoslista=[obstaculo_pos,obstaculo2_pos,obstaculo2_1_pos,obstaculo3_pos,obstaculo3_1_pos,obstaculo3_2_pos]
 
 # ? IMPRIME OBBSTACULOS Y COMPRUEBA ? #
-    while igual and igual2:
+    while igual:
         while obstaculo2_pos==obstaculo_pos or obstaculo2_1_pos==obstaculo_pos:
             obstaculo2_pos=[(random.randint(2,8)),(random.randint(2,8))]
         else:
             igual=False
-        for obstaculo in obstaculo3:
-            while obstaculo==obstaculo_pos:
-                obstaculo3_pos=[(random.randint(2,8)),(random.randint(2,8))]
-            else:
+        while igual2:
+            for obstaculo in obstaculo3:
+                while obstaculo==obstaculo_pos:
+                    obstaculo3_pos=[(random.randint(2,8)),(random.randint(2,8))]
                 while obstaculo==obstaculo2_pos:
                     obstaculo3_pos=[(random.randint(2,8)),(random.randint(2,8))]
-                else:
-                    while obstaculo==obstaculo2_1_pos:
-                        obstaculo3_pos=[(random.randint(2,8)),(random.randint(2,8))]
-                    else:
-                        igual2=False
+                while obstaculo==obstaculo2_1_pos:
+                    obstaculo3_pos=[(random.randint(2,8)),(random.randint(2,8))]
+            igual2=False
 
 # * ------- IMAGEN DE FONDO------- * #
     background = pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\Background.png").convert_alpha()
@@ -97,29 +118,7 @@ def ejecucion_juego(ventana):
     araña[0] = pygame.transform.scale(araña[0],(45,45))
     araña[1] = pygame.transform.scale(araña[1],(45,45))
 
-# * --------- FUNCION COLISIÓN --------- ! #
-    def detectar_colision(tecla,movx,movy,lista1):
-    
-        if tecla=="w":
-            if movy==0 or lista1[movx][movy-1][2]==1:
-                return 0
-            else:
-                return "w"
-        if tecla=="a":
-            if movx==0 or lista1[movx-1][movy][2]==1:
-                return 0
-            else:
-                return "a"
-        if tecla=="s":
-            if movy==9 or lista1[movx][movy+1][2]==1:
-                return 0
-            else:
-                return "s"
-        if tecla=="d":
-            if movx==9 or lista1[movx+1][movy][2]==1:
-                return 0
-            else:
-                return "d"
+# * --------- FUNCION COLISIÓN --------- ! 
 
     clock = pygame.time.Clock()
 
@@ -149,6 +148,10 @@ def ejecucion_juego(ventana):
                     
     # ? --------- TECLAS --------- ? #
         for event in pygame.event.get():
+            
+            if event.type==pygame.QUIT:
+                sys.exit()
+      
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:# ! --------- SALIR DEL JUEGO --------- ! #
                     run = False
@@ -206,11 +209,10 @@ def ejecucion_juego(ventana):
                         v=1
         
         if puntaje==94:
-            
-            
             final_final+=1
         if final_final==2:
             escribir_texto_time(ventana,(ventana.get_width()/2,ventana.get_height()/2),"Ganaste",50)
+            ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33))
             pygame.display.flip()
             pygame.time.wait(5000)
             run=False
