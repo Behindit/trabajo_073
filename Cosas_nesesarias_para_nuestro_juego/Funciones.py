@@ -8,7 +8,21 @@ verde=[0,255,0]
 azul=[0,0,255]
 verdeazul=[0, 200, 70]
 
-#boton
+###Funciones###
+
+#movimiento enemigo
+def movimiento_alea_enemigo():
+    direccion=random.randint(0,3)
+    if direccion==0:
+        return "w"
+    if direccion==1:
+        return "a"
+    if direccion==2:
+        return "s"
+    if direccion==3:
+        return "d"
+
+#crear boton
 def crear_boton(pantalla,boton,texto):
     fuente1=pygame.font.SysFont("Times New Roman",30)
     if boton.collidepoint(pygame.mouse.get_pos()):
@@ -18,11 +32,13 @@ def crear_boton(pantalla,boton,texto):
     ren=fuente1.render(texto,True,(0,0,0))
     pantalla.blit(ren,(boton.x+(boton.width-ren.get_width())/2,boton.y+(boton.height-ren.get_height())/2))
 
+#imprime texto en pantalla
 def escribir_texto_time(pantalla,localizacion,texto,tamaño):
     fuente1=pygame.font.SysFont("Times New Roman",tamaño)
     ren2=fuente1.render(texto,True,(0,0,0))
     pantalla.blit(ren2,((localizacion[0]-(ren2.get_width()/2)),(localizacion[1]-(ren2.get_height()/2))))
 
+#detecta colision
 def detectar_colision(tecla,movx,movy,lista1):
     
         if tecla=="w":
@@ -54,6 +70,9 @@ def ejecucion_juego(ventana):
     lista1=[]
     movx=0
     movy=0
+    bachelet_onu=True
+    piñera_presidente=True
+    generacion_final=[]
     igual=True
     igual2=True
     v=0
@@ -65,6 +84,8 @@ def ejecucion_juego(ventana):
             x = 135 + (70*i)
             y = 120 + (60*j)
             lista1[i].append([x,y,0])
+
+    
 
 # * ------- OBSTACULOS ------- * #
     obstaculo_pos=[(random.randint(2,9)),(random.randint(2,9))]
@@ -81,8 +102,10 @@ def ejecucion_juego(ventana):
     obstaculoslista=[obstaculo_pos,obstaculo2_pos,obstaculo2_1_pos,obstaculo3_pos,obstaculo3_1_pos,obstaculo3_2_pos]
 
 # ? IMPRIME OBBSTACULOS Y COMPRUEBA ? #
-    while igual:
-        while obstaculo2_pos==obstaculo_pos or obstaculo2_1_pos==obstaculo_pos:
+    while piñera_presidente:
+        if igual==False and igual2==False:
+            piñera_presidente=False
+        if obstaculo2_pos==obstaculo_pos or obstaculo2_1_pos==obstaculo_pos:
             obstaculo2_pos=[(random.randint(2,8)),(random.randint(2,8))]
         else:
             igual=False
@@ -95,7 +118,20 @@ def ejecucion_juego(ventana):
                 while obstaculo==obstaculo2_1_pos:
                     obstaculo3_pos=[(random.randint(2,8)),(random.randint(2,8))]
             igual2=False
+        generacion_final=[obstaculo_pos,obstaculo2_pos,obstaculo2_1_pos,obstaculo3[0],obstaculo3[1],obstaculo3[2]]
+            
+    #generacionenemigos
+    moex=random.randint(4,9)
+    moey=random.randint(4,9)
 
+    while bachelet_onu:
+        for obstaculo_b in generacion_final:
+            if obstaculo_b==[moex,moey]:
+                moex=(random.randint(4,9)),(random.randint(4,9))
+                moey=(random.randint(4,9)),(random.randint(4,9))
+            else:
+                bachelet_onu=False
+        
 # * ------- IMAGEN DE FONDO------- * #
     background = pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\Background.png").convert_alpha()
     background = pygame.transform.scale(background,(960,800))
@@ -157,6 +193,34 @@ def ejecucion_juego(ventana):
                     run = False
             #* --------- MOVIMIENTO JUGADOR --------- *#
                 tecla_presionada = pygame.key.name(event.key)
+
+                if tecla_presionada=="w" or tecla_presionada=="a" or tecla_presionada=="s" or tecla_presionada=="d":
+                    direccion=movimiento_alea_enemigo()
+                    if direccion=="w":
+                        if detectar_colision("w",moex,moey,lista1)=="w":
+                            moey-=1
+                            pygame.draw.rect(ventana,negro,(lista1[moex][moey][0],lista1[moex][moey][1],45,45))
+                        else:
+                            moey+=0
+                    if direccion=="a":
+                        if detectar_colision("a",moex,moey,lista1)=="a":
+                            moex-=1
+                            pygame.draw.rect(ventana,negro,(lista1[moex][moey][0],lista1[moex][moey][1],45,45))
+                        else:
+                            moex+=0
+                    if direccion=="s":
+                        if detectar_colision("s",moex,moey,lista1)=="s":
+                            moey+=1
+                            pygame.draw.rect(ventana,negro,(lista1[moex][moey][0],lista1[moex][moey][1],45,45))
+                        else:
+                            moey+=0
+                    if direccion=="d":
+                        if detectar_colision("d",moex,moey,lista1)=="d":
+                            moex+=1
+                            pygame.draw.rect(ventana,negro,(lista1[moex][moey][0],lista1[moex][moey][1],45,45))
+                        else:
+                            moex+=0
+                    
                 if tecla_presionada == "w":# ? ----------- ARRIBA ----------- ? #
                     if detectar_colision("w",movx,movy,lista1)=="w":
                         if lista1[movx][movy-1][2]==0:
@@ -217,6 +281,7 @@ def ejecucion_juego(ventana):
             pygame.time.wait(5000)
             run=False
         print(puntaje)
-            
+
+        pygame.draw.rect(ventana,negro,(lista1[moex][moey][0],lista1[moex][moey][1],45,45))
         ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33)) # * --------- IMPRIME POSICION ARAÑA --------- * #
         pygame.display.flip()
