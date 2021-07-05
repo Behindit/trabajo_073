@@ -10,6 +10,19 @@ verdeazul=[0, 200, 70]
 
 ###Funciones###
 
+#generacion de enemigos
+def generacion_enemigos(lista):
+    bachelet_onu=True
+    moex=random.randint(4,9)
+    moey=random.randint(4,9)
+    while bachelet_onu:
+        if lista[moex][moey][2]==1:
+            moex=random.randint(4,9)
+            moey=random.randint(4,9)
+        else:
+            bachelet_onu=False
+    return [moex,moey]
+
 #movimiento enemigo
 def movimiento_alea_enemigo():
     direccion=random.randint(0,3)
@@ -70,7 +83,7 @@ def ejecucion_juego(ventana):
     lista1=[]
     movx=0
     movy=0
-    bachelet_onu=True
+    
     piñera_presidente=True
     generacion_final=[]
     igual=True
@@ -119,18 +132,14 @@ def ejecucion_juego(ventana):
                     obstaculo3_pos=[(random.randint(2,8)),(random.randint(2,8))]
             igual2=False
         generacion_final=[obstaculo_pos,obstaculo2_pos,obstaculo2_1_pos,obstaculo3[0],obstaculo3[1],obstaculo3[2]]
-            
-    #generacionenemigos
-    moex=random.randint(4,9)
-    moey=random.randint(4,9)
+    #generacion lista
+    for a in obstaculoslista:
+        lista1[a[0]][a[1]][2]=1
 
-    while bachelet_onu:
-        for obstaculo_b in generacion_final:
-            if obstaculo_b==[moex,moey]:
-                moex=(random.randint(4,9)),(random.randint(4,9))
-                moey=(random.randint(4,9)),(random.randint(4,9))
-            else:
-                bachelet_onu=False
+    #generacion enemigos
+    localizacion_enemigo=generacion_enemigos(lista1)
+    moex=localizacion_enemigo[0]
+    moey=localizacion_enemigo[1]
         
 # * ------- IMAGEN DE FONDO------- * #
     background = pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\Background.png").convert_alpha()
@@ -166,8 +175,11 @@ def ejecucion_juego(ventana):
 
         clock.tick(60)
     # ! Obstaculos ! #
-        for a in obstaculoslista:
-            lista1[a[0]][a[1]][2]=1
+        
+
+    #generacion enemigos
+        
+        
     
     # * --------- TABLERO JUEGO --------- * #
         for c in lista1:
