@@ -1,4 +1,5 @@
 import pygame,sys,random,os
+from Funciones_enemigos import *
 
 #colores
 blanco=[255,255,255]
@@ -9,31 +10,6 @@ azul=[0,0,255]
 verdeazul=[0, 200, 70]
 
 ###Funciones###
-
-#generacion de enemigos
-def generacion_enemigos(lista):
-    bachelet_onu=True
-    moex=random.randint(4,9)
-    moey=random.randint(4,9)
-    while bachelet_onu:
-        if lista[moex][moey][2]==1:
-            moex=random.randint(4,9)
-            moey=random.randint(4,9)
-        else:
-            bachelet_onu=False
-    return [moex,moey]
-
-#movimiento enemigo
-def movimiento_alea_enemigo():
-    direccion=random.randint(0,3)
-    if direccion==0:
-        return "w"
-    if direccion==1:
-        return "a"
-    if direccion==2:
-        return "s"
-    if direccion==3:
-        return "d"
 
 #crear boton
 def crear_boton(pantalla,boton,texto):
@@ -53,27 +29,26 @@ def escribir_texto_time(pantalla,localizacion,texto,tamaño):
 
 #detecta colision
 def detectar_colision(tecla,movx,movy,lista1):
-    
-        if tecla=="w":
-            if movy==0 or lista1[movx][movy-1][2]==1:
-                return 0
-            else:
-                return "w"
-        if tecla=="a":
-            if movx==0 or lista1[movx-1][movy][2]==1:
-                return 0
-            else:
-                return "a"
-        if tecla=="s":
-            if movy==9 or lista1[movx][movy+1][2]==1:
-                return 0
-            else:
-                return "s"
-        if tecla=="d":
-            if movx==9 or lista1[movx+1][movy][2]==1:
-                return 0
-            else:
-                return "d"
+    if tecla=="w":
+        if movy==0 or lista1[movx][movy-1][2]==1:
+            return 0
+        else:
+            return "w"
+    if tecla=="a":
+        if movx==0 or lista1[movx-1][movy][2]==1:
+            return 0
+        else:
+            return "a"
+    if tecla=="s":
+        if movy==9 or lista1[movx][movy+1][2]==1:
+            return 0
+        else:
+            return "s"
+    if tecla=="d":
+        if movx==9 or lista1[movx+1][movy][2]==1:
+            return 0
+        else:
+            return "d"
 
 #juego
 def ejecucion_juego(ventana):
@@ -140,6 +115,9 @@ def ejecucion_juego(ventana):
     localizacion_enemigo=generacion_enemigos(lista1)
     moex=localizacion_enemigo[0]
     moey=localizacion_enemigo[1]
+    localizacion_enemigo2=generacion_enemigos(lista1)
+    moex2=localizacion_enemigo2[0]
+    moey2=localizacion_enemigo2[1]
         
 # * ------- IMAGEN DE FONDO------- * #
     background = pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\Background.png").convert_alpha()
@@ -206,32 +184,13 @@ def ejecucion_juego(ventana):
             #* --------- MOVIMIENTO JUGADOR --------- *#
                 tecla_presionada = pygame.key.name(event.key)
 
-                if tecla_presionada=="w" or tecla_presionada=="a" or tecla_presionada=="s" or tecla_presionada=="d":
-                    direccion=movimiento_alea_enemigo()
-                    if direccion=="w":
-                        if detectar_colision("w",moex,moey,lista1)=="w":
-                            moey-=1
-                            pygame.draw.rect(ventana,negro,(lista1[moex][moey][0],lista1[moex][moey][1],45,45))
-                        else:
-                            moey+=0
-                    if direccion=="a":
-                        if detectar_colision("a",moex,moey,lista1)=="a":
-                            moex-=1
-                            pygame.draw.rect(ventana,negro,(lista1[moex][moey][0],lista1[moex][moey][1],45,45))
-                        else:
-                            moex+=0
-                    if direccion=="s":
-                        if detectar_colision("s",moex,moey,lista1)=="s":
-                            moey+=1
-                            pygame.draw.rect(ventana,negro,(lista1[moex][moey][0],lista1[moex][moey][1],45,45))
-                        else:
-                            moey+=0
-                    if direccion=="d":
-                        if detectar_colision("d",moex,moey,lista1)=="d":
-                            moex+=1
-                            pygame.draw.rect(ventana,negro,(lista1[moex][moey][0],lista1[moex][moey][1],45,45))
-                        else:
-                            moex+=0
+                if tecla_presionada!="escape":
+                    movimiento=movimiento_enemigo(moex,moey,lista1)
+                    moex=movimiento[0]
+                    moey=movimiento[1]
+                    movimiento2=movimiento_enemigo(moex2,moey2,lista1)
+                    moex2=movimiento2[0]
+                    moey2=movimiento2[1]
                     
                 if tecla_presionada == "w":# ? ----------- ARRIBA ----------- ? #
                     if detectar_colision("w",movx,movy,lista1)=="w":
@@ -294,6 +253,10 @@ def ejecucion_juego(ventana):
             run=False
         print(puntaje)
 
+        print (moex)
+        print(moey)
+        #pygame.time.wait(1000)
         pygame.draw.rect(ventana,negro,(lista1[moex][moey][0],lista1[moex][moey][1],45,45))
+        pygame.draw.rect(ventana,negro,(lista1[moex2][moey2][0],lista1[moex2][moey2][1],45,45))
         ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33)) # * --------- IMPRIME POSICION ARAÑA --------- * #
         pygame.display.flip()
