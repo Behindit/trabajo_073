@@ -29,29 +29,6 @@ def escribir_texto_time(pantalla,localizacion,texto,tamaño):
     ren2=fuente1.render(texto,True,(0,0,0))
     pantalla.blit(ren2,((localizacion[0]-(ren2.get_width()/2)),(localizacion[1]-(ren2.get_height()/2))))
 
-#detecta colision
-def detectar_colision(tecla,movx,movy,lista1):
-    if tecla=="w":
-        if movy==0 or lista1[movx][movy-1][2]==1:
-            return 0
-        else:
-            return "w"
-    if tecla=="a":
-        if movx==0 or lista1[movx-1][movy][2]==1:
-            return 0
-        else:
-            return "a"
-    if tecla=="s":
-        if movy==9 or lista1[movx][movy+1][2]==1:
-            return 0
-        else:
-            return "s"
-    if tecla=="d":
-        if movx==9 or lista1[movx+1][movy][2]==1:
-            return 0
-        else:
-            return "d"
-
 #juego
 def ejecucion_juego(ventana):
     final_final=0
@@ -113,7 +90,7 @@ def ejecucion_juego(ventana):
             igual2=False
         generacion_final=[obstaculo_pos,obstaculo2_pos,obstaculo2_1_pos,obstaculo3[0],obstaculo3[1],obstaculo3[2]]
     #generacion lista
-    for a in obstaculoslista:
+    for a in generacion_final:
         lista1[a[0]][a[1]][2]=1
 
     #generacion enemigos
@@ -232,23 +209,23 @@ def ejecucion_juego(ventana):
 
         #corazones
         if corazones==0:
-            ventana.blit(vida_F,(765,30))
-            ventana.blit(vida_F,(820,30))
-            ventana.blit(vida_F,(875,30))
+            ventana.blit(vida_F,(705,10))
+            ventana.blit(vida_F,(760,10))
+            ventana.blit(vida_F,(815,10))
         else:
             if corazones==1:
-                ventana.blit(vida_F,(765,30))
-                ventana.blit(vida_F,(820,30))
-                ventana.blit(vida_T,(875,30))
+                ventana.blit(vida_F,(765,10))
+                ventana.blit(vida_F,(820,10))
+                ventana.blit(vida_T,(815,10))
             else:
                 if corazones==2:
-                    ventana.blit(vida_F,(765,30))
-                    ventana.blit(vida_T,(820,30))
-                    ventana.blit(vida_T,(875,30))
+                    ventana.blit(vida_F,(765,10))
+                    ventana.blit(vida_T,(820,10))
+                    ventana.blit(vida_T,(875,10))
                 else:
-                    ventana.blit(vida_T,(765,30))
-                    ventana.blit(vida_T,(820,30))
-                    ventana.blit(vida_T,(875,30))
+                    ventana.blit(vida_T,(705,10))
+                    ventana.blit(vida_T,(760,10))
+                    ventana.blit(vida_T,(815,10))
                     
     # ? --------- TECLAS --------- ? #
         for event in pygame.event.get():
@@ -326,19 +303,17 @@ def ejecucion_juego(ventana):
                         v=1
         
         if puntaje==652:
-            final_final+=1
-        if final_final==2:
             pygame.mixer.music.stop()
             victoria(ventana)
             run=False
 
         if corazones==0:
-            game_over+=1
-        if game_over==2:
             pygame.mixer.music.stop()
             Derrota(ventana)
             run=False
-        escribir_texto_time(ventana,[895,200],str(puntaje),40)
+
+        escribir_texto_time(ventana,[770,77],"Puntaje: ",40)
+        escribir_texto_time(ventana,[850,77],str(puntaje),40)
         ventana.blit(pokemon[xd],(lista1[moex][moey][0]+15,lista1[moex][moey][1]-39))
         ventana.blit(sapo[dx],(lista1[moex2][moey2][0]+15,lista1[moex2][moey2][1]-39))
         ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33)) # * --------- IMPRIME POSICION ARAÑA --------- * #

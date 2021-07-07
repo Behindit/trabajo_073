@@ -1,5 +1,4 @@
 import pygame,sys,random,os
-from Funciones import *
 
 #colores
 blanco=[255,255,255]
@@ -9,7 +8,7 @@ verde=[0,255,0]
 azul=[0,0,255]
 verdeazul=[0, 200, 70]
 
-#detectar colision
+#detecta colision
 def detectar_colision(tecla,movx,movy,lista1):
     if tecla=="w":
         if movy==0 or lista1[movx][movy-1][2]==1:
