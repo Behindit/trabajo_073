@@ -1,5 +1,6 @@
 import pygame,sys,random,os
 from Funciones_enemigos import *
+from Victoria import *
 
 #colores
 blanco=[255,255,255]
@@ -320,7 +321,7 @@ def ejecucion_juego(ventana):
             final_final+=1
         if final_final==2:
             pygame.mixer.music.stop()
-            escribir_texto_time(ventana,(ventana.get_width()/2,ventana.get_height()/2),"Ganaste",50)
+            victoria(ventana)
             ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33))
             pygame.display.flip()
             pygame.time.wait(5000)

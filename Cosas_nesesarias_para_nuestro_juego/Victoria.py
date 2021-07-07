@@ -1,15 +1,22 @@
 import pygame,sys,random
 from Funciones import *
+from Funciones_enemigos import *
 
 pygame.init()
 
-def Victoria():
-    resolucion=[960,800]
-    ventana=pygame.display.set_mode(resolucion)
-    Continuar=pygame.Rect(resolucion[0]-100,resolucion[1]-100,150,50)
+def crear_boton(pantalla,boton,texto,tamaño):
+    fuente1=pygame.font.SysFont("Times New Roman",tamaño)
+    if boton.collidepoint(pygame.mouse.get_pos()):
+        pygame.draw.rect(pantalla,[225, 38, 180],boton,0)
+    else:
+        pygame.draw.rect(pantalla,[174, 15, 135],boton,0)
+    ren=fuente1.render(texto,True,(255,255,255))
+    pantalla.blit(ren,(boton.x+(boton.width-ren.get_width())/2,boton.y+(boton.height-ren.get_height())/2))
+
+def victoria(ventana):
     fotograma = 0
     f_muro = 0
-    continuar=pygame.Rect(resolucion[0]-200,resolucion[1]-125,170,70)
+    continuar=pygame.Rect(960-200,800-100,170,70)
 
     araña_feliz = [pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Feliz_L.png").convert_alpha()
                 ,pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Feliz_R.png").convert_alpha()]
@@ -33,7 +40,6 @@ def Victoria():
         if(fotograma==2):
             fotograma=0
         
-        ventana.blit(araña_feliz[fotograma],(10,resolucion[1]-475))    
+        ventana.blit(araña_feliz[fotograma],(10,800-475))    
         crear_boton(ventana,continuar,"Continuar",40)
         pygame.display.flip()
-Victoria()
