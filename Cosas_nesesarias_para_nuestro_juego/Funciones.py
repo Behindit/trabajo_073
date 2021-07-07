@@ -53,6 +53,7 @@ def detectar_colision(tecla,movx,movy,lista1):
 #juego
 def ejecucion_juego(ventana):
     final_final=0
+    game_over=0
     puntaje=1
     pygame.init()
     lista1=[]
@@ -143,13 +144,11 @@ def ejecucion_juego(ventana):
     araña[0] = pygame.transform.scale(araña[0],(45,45))
     araña[1] = pygame.transform.scale(araña[1],(45,45))
 
-# * ------- ENEMIGO POKEMON ------- * #
     pokemon = [pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/SQ_L.png").convert_alpha()
             ,pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/SQ_R.png").convert_alpha()]
     pokemon[0] = pygame.transform.scale(pokemon[0],(50,50))
     pokemon[1] = pygame.transform.scale(pokemon[1],(50,50))
 
-# * ------- ENEMIGO SAPO------- * #
     sapo = [pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Frog_L.png").convert_alpha()
             ,pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Frog_R.png").convert_alpha()]
     sapo[0] = pygame.transform.scale(sapo[0],(50,50))
@@ -167,8 +166,9 @@ def ejecucion_juego(ventana):
     Muerte.set_volume(0.1)
 
 # * --------- FUNCION COLISIÓN --------- ! 
-    clock = pygame.time.Clock()
     lista1[0][0][2]=2
+    clock = pygame.time.Clock()
+
     run=True
     while run:
     # * --------- IMAGEN DE FONDO --------- * #
@@ -177,6 +177,7 @@ def ejecucion_juego(ventana):
 
         clock.tick(60)      
         
+    
     # * --------- TABLERO JUEGO --------- * #
         for c in lista1:
             for u in c:
@@ -188,21 +189,26 @@ def ejecucion_juego(ventana):
                     if u[2]==1:
                         ventana.blit(rocaObs,[u[0],u[1]])
 
+        if detectar_jugadorenemigo(moex,moey,movx,movy,lista1) or detectar_jugadorenemigo(moex2,moey2,movx,movy,lista1):
+            movx=0
+            movy=0
+            corazones-=1
+
         #corazones
         if corazones==0:
-            ventana.blit(vida_F,(800,30))
-            ventana.blit(vida_F,(850,30))
-            ventana.blit(vida_F,(900,30))
+            ventana.blit(vida_F,(765,30))
+            ventana.blit(vida_F,(820,30))
+            ventana.blit(vida_F,(875,30))
         else:
             if corazones==1:
-                ventana.blit(vida_F,(800,30))
-                ventana.blit(vida_F,(850,30))
-                ventana.blit(vida_T,(900,30))
+                ventana.blit(vida_F,(765,30))
+                ventana.blit(vida_F,(820,30))
+                ventana.blit(vida_T,(875,30))
             else:
                 if corazones==2:
-                    ventana.blit(vida_F,(800,30))
-                    ventana.blit(vida_T,(850,30))
-                    ventana.blit(vida_T,(900,30))
+                    ventana.blit(vida_F,(765,30))
+                    ventana.blit(vida_T,(820,30))
+                    ventana.blit(vida_T,(875,30))
                 else:
                     ventana.blit(vida_T,(765,30))
                     ventana.blit(vida_T,(820,30))
@@ -210,21 +216,24 @@ def ejecucion_juego(ventana):
                     
     # ? --------- TECLAS --------- ? #
         for event in pygame.event.get():
+            
             if event.type==pygame.QUIT:
                 pygame.mixer.music.stop()
                 sys.exit()
+      
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:# ! --------- SALIR DEL JUEGO --------- ! #
                     pygame.mixer.music.stop()
                     run = False
             #* --------- MOVIMIENTO JUGADOR --------- *#
                 tecla_presionada = pygame.key.name(event.key)
-                if tecla_presionada!="escape":
-                    movimiento=movimiento_enemigo(moex,moey,lista1,xd)
+
+                if tecla_presionada=="w" or tecla_presionada=="a" or tecla_presionada=="s" or tecla_presionada=="d":
+                    movimiento=movimiento_enemigo(moex,moey,moex2,moey2,lista1,xd)
                     moex=movimiento[0]
                     moey=movimiento[1]
                     xd=movimiento[2]
-                    movimiento2=movimiento_enemigo(moex2,moey2,lista1,dx)
+                    movimiento2=movimiento_enemigo(moex2,moey2,moex,moey,lista1,xd)
                     moex2=movimiento2[0]
                     moey2=movimiento2[1]
                     dx=movimiento[2]
@@ -289,12 +298,16 @@ def ejecucion_juego(ventana):
             pygame.display.flip()
             pygame.time.wait(5000)
             run=False
-        if detectar_jugadorenemigo(moex,moey,movx,movy,lista1):
-            movx=0
-            movy=0
-            Muerte.play()
-            corazones-=1
-            
+
+        if corazones==0:
+            game_over+=1
+        if game_over==2:
+            pygame.mixer.music.stop()
+            escribir_texto_time(ventana,(ventana.get_width()/2,ventana.get_height()/2),"Perdiste",50)
+            ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33))
+            pygame.display.flip()
+            pygame.time.wait(5000)
+            run=False
         ventana.blit(pokemon[xd],(lista1[moex][moey][0]+15,lista1[moex][moey][1]-39))
         ventana.blit(sapo[dx],(lista1[moex2][moey2][0]+15,lista1[moex2][moey2][1]-39))
         ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33)) # * --------- IMPRIME POSICION ARAÑA --------- * #

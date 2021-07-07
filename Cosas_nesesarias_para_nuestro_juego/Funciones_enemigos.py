@@ -32,32 +32,60 @@ def detectar_colision(tecla,movx,movy,lista1):
         else:
             return "d"
 
+#colision_entre_enemigos
+def colision_entre_enemigos(direccion,moex_inicial,moey_inicial,moex_secundario,moey_secundario):
+    
+    if direccion=="w":
+        if moex_inicial==moex_secundario and moey_inicial-1==moey_secundario:
+            return False
+        else:
+            return True
+    if direccion=="a":
+        if moex_inicial-1==moex_secundario and moey_inicial==moey_secundario:
+            return False
+        else:
+            return True
+    if direccion=="s":
+        if moex_inicial==moex_secundario and moey_inicial+1==moey_secundario:
+            return False
+        else:
+            return True
+    if direccion=="d":
+        if moex_inicial+1==moex_secundario and moey_inicial==moey_secundario:
+            return False
+        else:
+            return True
+
+
 #movimiento enemigo
-def movimiento_enemigo(moex,moey,lista1,xd):
+def movimiento_enemigo(moex_inicial,moey_inicial,moex_secundario,moey_secundario,lista1,xd):
     direccion=direccion_alea_enemigo()
     if direccion=="arriba":
-        if detectar_colision("w",moex,moey,lista1)=="w":
-            moey-=1
+        if detectar_colision("w",moex_inicial,moey_inicial,lista1)=="w" and colision_entre_enemigos("w",moex_inicial,moey_inicial,moex_secundario,moey_secundario):
+            moey_inicial-=1
         else:
-            moey+=0
+            moey_inicial+=0
     if direccion=="izquierda":
-        if detectar_colision("a",moex,moey,lista1)=="a":
-            moex-=1
+        if detectar_colision("a",moex_inicial,moey_inicial,lista1)=="a" and colision_entre_enemigos("a",moex_inicial,moey_inicial,moex_secundario,moey_secundario):
+            moex_inicial-=1
             xd=0
         else:
-            moex+=0
+            moex_inicial+=0
     if direccion=="abajo":
-        if detectar_colision("s",moex,moey,lista1)=="s":
-            moey+=1
+        if detectar_colision("s",moex_inicial,moey_inicial,lista1)=="s" and colision_entre_enemigos("s",moex_inicial,moey_inicial,moex_secundario,moey_secundario):
+            moey_inicial+=1
         else:
-            moey+=0
+            moey_inicial+=0
     if direccion=="derecha":
-        if detectar_colision("d",moex,moey,lista1)=="d":
-            moex+=1
+        if detectar_colision("d",moex_inicial,moey_inicial,lista1)=="d" and colision_entre_enemigos("d",moex_inicial,moey_inicial,moex_secundario,moey_secundario):
+            moex_inicial+=1
             xd=1
         else:
-            moex+=0
-    return [moex,moey,xd]
+            moex_inicial+=0
+    if direccion=="quieto":
+            moex_inicial+=0
+        
+    return [moex_inicial,moey_inicial,xd]
 
 #generacion de enemigos
 def generacion_enemigos(lista):
@@ -74,7 +102,7 @@ def generacion_enemigos(lista):
 
 #direccion enemigo
 def direccion_alea_enemigo():
-    direccion=random.randint(0,3)
+    direccion=random.randint(0,4)
     if direccion==0:
         return "arriba"
     if direccion==1:
@@ -83,6 +111,8 @@ def direccion_alea_enemigo():
         return "abajo"
     if direccion==3:
         return "derecha"
+    if direccion==4:
+        return "quieto"
 
 #detectar colision jugador-enemigo
 def detectar_jugadorenemigo(enemigox,enemigoy,jugadorx,jugadory,lista):
