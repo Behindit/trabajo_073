@@ -18,7 +18,6 @@ def victoria(ventana):
     fotograma = 0
     f_muro = 0
     continuar=pygame.Rect(960-200,800-100,170,70)
-
     pygame.mixer.music.load(os.path.dirname(os.path.abspath(__file__))+"\\Musica/VICTORIA.wav")
     pygame.mixer.music.play(1,0.0)
     pygame.mixer.music.set_volume(0.08)
@@ -29,6 +28,7 @@ def victoria(ventana):
     araña_feliz[1] = pygame.transform.scale(araña_feliz[1],(570,380))
     araña_feliz[0] = pygame.transform.rotate(araña_feliz[0],-5)
     araña_feliz[1] = pygame.transform.rotate(araña_feliz[1],-5)
+
     run=True
     while run:
         ventana.fill((86, 18, 132))
@@ -38,6 +38,8 @@ def victoria(ventana):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     run = False
+            if event.type==pygame.MOUSEBUTTONDOWN and event.button==1 and continuar.collidepoint(pygame.mouse.get_pos()):
+                run=False
         f_muro+=1
         if(f_muro==60):
             fotograma+=1

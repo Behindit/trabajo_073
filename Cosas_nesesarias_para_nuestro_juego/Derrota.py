@@ -44,6 +44,8 @@ def Derrota(ventana):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     run = False
+            if event.type==pygame.MOUSEBUTTONDOWN and event.button==1 and continuar.collidepoint(pygame.mouse.get_pos()):
+                run=False
         f_muro+=1
         if(f_muro==60):
             fotograma+=1
