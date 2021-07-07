@@ -2,6 +2,7 @@ import pygame,sys,random,os
 from Funciones_enemigos import *
 from Victoria import *
 from Derrota import *
+from Pantalla_de_carga import *
 
 #colores
 blanco=[255,255,255]
@@ -31,6 +32,9 @@ def escribir_texto_time(pantalla,localizacion,texto,tamaño):
 
 #juego
 def ejecucion_juego(ventana):
+
+    Pantalla_carga(ventana)
+    
     game_over=0
     puntaje=7
     pygame.init()
