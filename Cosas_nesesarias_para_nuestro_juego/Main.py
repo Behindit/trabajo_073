@@ -24,8 +24,7 @@ extras=pygame.Rect(resolucion[0]/2-75,resolucion[1]/4+270,150,50)
 salir=pygame.Rect(resolucion[0]/2-75,resolucion[1]/4+345,150,50)
 
 run=True
-while run:
-    
+while run:  
     ventana.blit(fondo,[0,0])
     ventana.blit(titulo,[resolucion[0]/2-245,resolucion[1]/4-150])
     
@@ -46,7 +45,5 @@ while run:
     crear_boton(ventana,opciones,"Opciones")
     crear_boton(ventana,extras,"Extras")
     crear_boton(ventana,salir,"Salir")
-    
-
     
     pygame.display.flip()

@@ -90,11 +90,5 @@ def detectar_jugadorenemigo(enemigox,enemigoy,jugadorx,jugadory,lista):
     ey1=lista[enemigox][enemigoy][1]
     jx1=lista[jugadorx][jugadory][0]
     jy1=lista[jugadorx][jugadory][1]
-
-    print(ex1,ey1)
-    print(jx1,jy1)
-    pygame.time.wait(500)
-
     if ex1==jx1 and ey1==jy1:
         return True
-    
