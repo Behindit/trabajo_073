@@ -33,7 +33,7 @@ def detectar_colision(tecla,movx,movy,lista1):
             return "d"
 
 #movimiento enemigo
-def movimiento_enemigo(moex,moey,lista1):
+def movimiento_enemigo(moex,moey,lista1,xd):
     direccion=direccion_alea_enemigo()
     if direccion=="arriba":
         if detectar_colision("w",moex,moey,lista1)=="w":
@@ -43,6 +43,7 @@ def movimiento_enemigo(moex,moey,lista1):
     if direccion=="izquierda":
         if detectar_colision("a",moex,moey,lista1)=="a":
             moex-=1
+            xd=0
         else:
             moex+=0
     if direccion=="abajo":
@@ -53,9 +54,10 @@ def movimiento_enemigo(moex,moey,lista1):
     if direccion=="derecha":
         if detectar_colision("d",moex,moey,lista1)=="d":
             moex+=1
+            xd=1
         else:
             moex+=0
-    return [moex,moey]
+    return [moex,moey,xd]
 
 #generacion de enemigos
 def generacion_enemigos(lista):
@@ -81,3 +83,18 @@ def direccion_alea_enemigo():
         return "abajo"
     if direccion==3:
         return "derecha"
+
+#detectar colision jugador-enemigo
+def detectar_jugadorenemigo(enemigox,enemigoy,jugadorx,jugadory,lista):
+    ex1=lista[enemigox][enemigoy][0]
+    ey1=lista[enemigox][enemigoy][1]
+    jx1=lista[jugadorx][jugadory][0]
+    jy1=lista[jugadorx][jugadory][1]
+
+    print(ex1,ey1)
+    print(jx1,jy1)
+    pygame.time.wait(500)
+
+    if ex1==jx1 and ey1==jy1:
+        return True
+    

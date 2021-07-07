@@ -6,8 +6,10 @@ pygame.init()
 #ventana
 resolucion=[960,800]
 ventana=pygame.display.set_mode(resolucion)
-fondo=pygame.image.load("space.jpg").convert()
+fondo=pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background/Cueva.jpg").convert()
 fondo=pygame.transform.scale(fondo,resolucion)
+titulo=pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Titulo_Juego.png").convert_alpha()
+titulo=pygame.transform.scale(titulo,[503,206])
 
 #colores
 blanco=[255,255,255]
@@ -16,16 +18,16 @@ rojo=[255,0,0]
 verde=[0,255,0]
 azul=[0,0,255]
 
-jugar=pygame.Rect(resolucion[0]/2-75,resolucion[1]/4-25,150,50)
-opciones=pygame.Rect(resolucion[0]/2-75,resolucion[1]/4+50,150,50)
-extras=pygame.Rect(resolucion[0]/2-75,resolucion[1]/4+125,150,50)
-salir=pygame.Rect(resolucion[0]/2-75,resolucion[1]/4+200,150,50)
+jugar=pygame.Rect(resolucion[0]/2-75,resolucion[1]/4+120,150,50)
+opciones=pygame.Rect(resolucion[0]/2-75,resolucion[1]/4+195,150,50)
+extras=pygame.Rect(resolucion[0]/2-75,resolucion[1]/4+270,150,50)
+salir=pygame.Rect(resolucion[0]/2-75,resolucion[1]/4+345,150,50)
 
 run=True
 while run:
     
-    ventana.fill(negro)
     ventana.blit(fondo,[0,0])
+    ventana.blit(titulo,[resolucion[0]/2-245,resolucion[1]/4-150])
     
     for event in pygame.event.get():
         if event.type==pygame.QUIT:

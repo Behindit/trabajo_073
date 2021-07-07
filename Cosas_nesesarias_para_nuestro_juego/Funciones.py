@@ -15,10 +15,10 @@ verdeazul=[0, 200, 70]
 def crear_boton(pantalla,boton,texto):
     fuente1=pygame.font.SysFont("Times New Roman",30)
     if boton.collidepoint(pygame.mouse.get_pos()):
-        pygame.draw.rect(pantalla,verdeazul,boton,0)
+        pygame.draw.rect(pantalla,[225, 38, 180],boton,0)
     else:
-        pygame.draw.rect(pantalla,verde,boton,0)
-    ren=fuente1.render(texto,True,(0,0,0))
+        pygame.draw.rect(pantalla,[174, 15, 135],boton,0)
+    ren=fuente1.render(texto,True,(255,255,255))
     pantalla.blit(ren,(boton.x+(boton.width-ren.get_width())/2,boton.y+(boton.height-ren.get_height())/2))
 
 #imprime texto en pantalla
@@ -58,11 +58,12 @@ def ejecucion_juego(ventana):
     lista1=[]
     movx=0
     movy=0
-    
+    corazones=3
     piñera_presidente=True
     generacion_final=[]
     igual=True
     igual2=True
+    xd=0
     v=0
 
 # ? ------- LISTA DEL TABLERO ------- ? #
@@ -76,7 +77,7 @@ def ejecucion_juego(ventana):
     
 
 # * ------- OBSTACULOS ------- * #
-    obstaculo_pos=[(random.randint(2,9)),(random.randint(2,9))]
+    obstaculo_pos=[(random.randint(2,8)),(random.randint(2,8))]
 
     obstaculo2_pos=[(random.randint(2,9)),(random.randint(2,9))]
     obstaculo2_1_pos=[obstaculo2_pos[0],obstaculo2_pos[1]-1]
@@ -141,8 +142,20 @@ def ejecucion_juego(ventana):
     araña[0] = pygame.transform.scale(araña[0],(45,45))
     araña[1] = pygame.transform.scale(araña[1],(45,45))
 
-# * --------- FUNCION COLISIÓN --------- ! 
+    pokemon = [pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/SQ_L.png").convert_alpha()
+            ,pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/SQ_R.png").convert_alpha()]
+    pokemon[0] = pygame.transform.scale(pokemon[0],(50,50))
+    pokemon[1] = pygame.transform.scale(pokemon[1],(50,50))
 
+
+    # * ------- AQUI ES DONDE SE CARGA LA MUSICA DE FONDO ------- * #
+    pygame.mixer.music.load(os.path.dirname(os.path.abspath(__file__))+"\\Musica/mus_spider.wav")
+    pygame.mixer.music.play(-1,0.0)
+    pygame.mixer.music.set_volume(0.04)
+    lista1[0][0][2]=2
+
+# * --------- FUNCION COLISIÓN --------- ! 
+    lista1[0][0][2]=2
     clock = pygame.time.Clock()
 
     run=True
@@ -151,12 +164,7 @@ def ejecucion_juego(ventana):
         ventana.fill((132,130,128))
         ventana.blit(background,[0,0])  
 
-        clock.tick(60)
-    # ! Obstaculos ! #
-        
-
-    #generacion enemigos
-        
+        clock.tick(60)      
         
     
     # * --------- TABLERO JUEGO --------- * #
@@ -170,27 +178,40 @@ def ejecucion_juego(ventana):
                     if u[2]==1:
                         ventana.blit(rocaObs,[u[0],u[1]])
 
-        lista1[0][0][2]=2
+        
+
+        #corazones
+        if corazones==1:
+            print("1")
+        else:
+            if corazones==2:
+                print("2")
+            else:
+                print("3")
                     
     # ? --------- TECLAS --------- ? #
         for event in pygame.event.get():
             
             if event.type==pygame.QUIT:
+                pygame.mixer.music.stop()
                 sys.exit()
       
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:# ! --------- SALIR DEL JUEGO --------- ! #
+                    pygame.mixer.music.stop()
                     run = False
             #* --------- MOVIMIENTO JUGADOR --------- *#
                 tecla_presionada = pygame.key.name(event.key)
 
                 if tecla_presionada!="escape":
-                    movimiento=movimiento_enemigo(moex,moey,lista1)
+                    movimiento=movimiento_enemigo(moex,moey,lista1,xd)
                     moex=movimiento[0]
                     moey=movimiento[1]
-                    movimiento2=movimiento_enemigo(moex2,moey2,lista1)
+                    xd=movimiento[2]
+                    movimiento2=movimiento_enemigo(moex2,moey2,lista1,xd)
                     moex2=movimiento2[0]
                     moey2=movimiento2[1]
+                    xd=movimiento[2]
                     
                 if tecla_presionada == "w":# ? ----------- ARRIBA ----------- ? #
                     if detectar_colision("w",movx,movy,lista1)=="w":
@@ -246,17 +267,19 @@ def ejecucion_juego(ventana):
         if puntaje==94:
             final_final+=1
         if final_final==2:
+            pygame.mixer.music.stop()
             escribir_texto_time(ventana,(ventana.get_width()/2,ventana.get_height()/2),"Ganaste",50)
             ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33))
             pygame.display.flip()
             pygame.time.wait(5000)
             run=False
-        print(puntaje)
 
-        print (moex)
-        print(moey)
-        #pygame.time.wait(1000)
-        pygame.draw.rect(ventana,negro,(lista1[moex][moey][0],lista1[moex][moey][1],45,45))
+        if detectar_jugadorenemigo(moex,moey,movx,movy,lista1):
+            movx=0
+            movy=0
+            corazones-=1
+        
+        ventana.blit(pokemon[xd],(lista1[moex][moey][0]+15,lista1[moex][moey][1]-39))
         pygame.draw.rect(ventana,negro,(lista1[moex2][moey2][0],lista1[moex2][moey2][1],45,45))
         ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33)) # * --------- IMPRIME POSICION ARAÑA --------- * #
         pygame.display.flip()
