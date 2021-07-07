@@ -35,12 +35,12 @@ def detectar_colision(tecla,movx,movy,lista1):
 def colision_entre_enemigos(direccion,moex_inicial,moey_inicial,moex_secundario,moey_secundario):
     
     if direccion=="w":
-        if moex_inicial==moex_secundario and moey_inicial-1==moey_secundario:
+        if (moex_inicial==moex_secundario and moey_inicial-1==moey_secundario) or (moex_inicial<3 and moey_inicial<3):
             return False
         else:
             return True
     if direccion=="a":
-        if moex_inicial-1==moex_secundario and moey_inicial==moey_secundario:
+        if moex_inicial-1==moex_secundario and moey_inicial==moey_secundario or (moex_inicial<3 and moey_inicial<3):
             return False
         else:
             return True
