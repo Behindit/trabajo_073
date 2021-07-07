@@ -24,8 +24,8 @@ def crear_boton(pantalla,boton,texto,tamaño):
     pantalla.blit(ren,(boton.x+(boton.width-ren.get_width())/2,boton.y+(boton.height-ren.get_height())/2))
 
 #imprime texto en pantalla
-def escribir_texto_time(pantalla,localizacion,texto,tamaño):
-    fuente1=pygame.font.SysFont("Times New Roman Bold",tamaño)
+def escribir_texto(pantalla,localizacion,texto,tamaño):
+    fuente1=pygame.font.SysFont("Times New Roman",tamaño)
     ren2=fuente1.render(texto,True,(0,0,0))
     pantalla.blit(ren2,((localizacion[0]-(ren2.get_width()/2)),(localizacion[1]-(ren2.get_height()/2))))
 
@@ -112,6 +112,7 @@ def ejecucion_juego(ventana):
                     obstaculo3_pos=[(random.randint(2,8)),(random.randint(2,8))]
             igual2=False
         generacion_final=[obstaculo_pos,obstaculo2_pos,obstaculo2_1_pos,obstaculo3[0],obstaculo3[1],obstaculo3[2]]
+    
     #generacion lista
     for a in obstaculoslista:
         lista1[a[0]][a[1]][2]=1
@@ -252,7 +253,6 @@ def ejecucion_juego(ventana):
                     
     # ? --------- TECLAS --------- ? #
         for event in pygame.event.get():
-            
             if event.type==pygame.QUIT:
                 pygame.mixer.music.stop()
                 sys.exit()
@@ -329,16 +329,16 @@ def ejecucion_juego(ventana):
             final_final+=1
         if final_final==2:
             pygame.mixer.music.stop()
-            victoria(ventana)
+            victoria(ventana,puntaje)
             run=False
 
         if corazones==0:
             game_over+=1
         if game_over==2:
             pygame.mixer.music.stop()
-            Derrota(ventana)
+            Derrota(ventana,puntaje)
             run=False
-        escribir_texto_time(ventana,[895,200],str(puntaje),40)
+        escribir_texto(ventana,[895,200],str(puntaje),40)
         ventana.blit(pokemon[xd],(lista1[moex][moey][0]+15,lista1[moex][moey][1]-39))
         ventana.blit(sapo[dx],(lista1[moex2][moey2][0]+15,lista1[moex2][moey2][1]-39))
         ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33)) # * --------- IMPRIME POSICION ARAÑA --------- * #

@@ -1,9 +1,11 @@
-import pygame,sys,random
+import pygame,sys,random,os
 from Funciones import *
-from Funciones_enemigos import *
-from pygame import mixer
-
 pygame.init()
+
+def escribir_texto(pantalla,localizacion,texto,tamaño):
+    fuente1=pygame.font.SysFont("Times New Roman",tamaño)
+    ren2=fuente1.render(texto,True,(255,255,255))
+    pantalla.blit(ren2,((localizacion[0]-(ren2.get_width()/2)),(localizacion[1]-(ren2.get_height()/2))))
 
 def crear_boton(pantalla,boton,texto,tamaño):
     fuente1=pygame.font.SysFont("Times New Roman",tamaño)
@@ -14,7 +16,7 @@ def crear_boton(pantalla,boton,texto,tamaño):
     ren=fuente1.render(texto,True,(255,255,255))
     pantalla.blit(ren,(boton.x+(boton.width-ren.get_width())/2,boton.y+(boton.height-ren.get_height())/2))
 
-def victoria(ventana):
+def victoria(ventana,puntaje):
     fotograma = 0
     f_muro = 0
     continuar=pygame.Rect(960-200,800-100,170,70)
@@ -35,9 +37,6 @@ def victoria(ventana):
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    run = False
             if event.type==pygame.MOUSEBUTTONDOWN and event.button==1 and continuar.collidepoint(pygame.mouse.get_pos()):
                 run=False
         f_muro+=1
@@ -47,6 +46,8 @@ def victoria(ventana):
         if(fotograma==2):
             fotograma=0
         
+        escribir_texto(ventana,[960/2,150],"¡VICTORIA!",100)
+        escribir_texto(ventana,[960/2,210],str(puntaje),50)
         ventana.blit(araña_feliz[fotograma],(10,800-475))    
         crear_boton(ventana,continuar,"Continuar",40)
         pygame.display.flip()
