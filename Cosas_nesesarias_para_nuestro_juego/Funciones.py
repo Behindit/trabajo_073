@@ -25,7 +25,7 @@ def crear_boton(pantalla,boton,texto,tamaño):
 
 #imprime texto en pantalla
 def escribir_texto_time(pantalla,localizacion,texto,tamaño):
-    fuente1=pygame.font.SysFont("Times New Roman",tamaño)
+    fuente1=pygame.font.SysFont("Times New Roman Bold",tamaño)
     ren2=fuente1.render(texto,True,(0,0,0))
     pantalla.blit(ren2,((localizacion[0]-(ren2.get_width()/2)),(localizacion[1]-(ren2.get_height()/2))))
 
@@ -278,10 +278,10 @@ def ejecucion_juego(ventana):
                     if detectar_colision("w",movx,movy,lista1)=="w":
                         if lista1[movx][movy-1][2]==0:
                             lista1[movx][movy-1][2]=2
-                            puntaje+=1
+                            puntaje+=7
                         else:
                             lista1[movx][movy-1][2]=0
-                            puntaje-=1
+                            puntaje-=7
                         movy-=1
                     else:
                         movy+=0
@@ -289,11 +289,11 @@ def ejecucion_juego(ventana):
                     if detectar_colision("a",movx,movy,lista1)=="a":
                         if lista1[movx-1][movy][2]==0:
                             lista1[movx-1][movy][2]=2
-                            puntaje+=1
+                            puntaje+=7
                             v=0
                         else:
                             lista1[movx-1][movy][2]=0
-                            puntaje-=1
+                            puntaje-=7
                             v=0
                         movx-=1
                     else:
@@ -303,10 +303,10 @@ def ejecucion_juego(ventana):
                     if detectar_colision("s",movx,movy,lista1)=="s":
                         if lista1[movx][movy+1][2]==0:
                             lista1[movx][movy+1][2]=2
-                            puntaje+=1
+                            puntaje+=7
                         else:
                             lista1[movx][movy+1][2]=0
-                            puntaje-=1
+                            puntaje-=7
                         movy+=1
                     else:
                         movy+=0
@@ -314,18 +314,18 @@ def ejecucion_juego(ventana):
                     if detectar_colision("d",movx,movy,lista1)=="d":
                         if lista1[movx+1][movy][2]==0:
                             lista1[movx+1][movy][2]=2
-                            puntaje+=1
+                            puntaje+=7
                             v=1
                         else:
                             lista1[movx+1][movy][2]=0
-                            puntaje-=1
+                            puntaje-=7
                             v=1
                         movx+=1
                     else:
                         movx+=0
                         v=1
         
-        if puntaje==94:
+        if puntaje==652:
             final_final+=1
         if final_final==2:
             pygame.mixer.music.stop()
@@ -338,6 +338,7 @@ def ejecucion_juego(ventana):
             pygame.mixer.music.stop()
             Derrota(ventana)
             run=False
+        escribir_texto_time(ventana,[895,200],str(puntaje),40)
         ventana.blit(pokemon[xd],(lista1[moex][moey][0]+15,lista1[moex][moey][1]-39))
         ventana.blit(sapo[dx],(lista1[moex2][moey2][0]+15,lista1[moex2][moey2][1]-39))
         ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33)) # * --------- IMPRIME POSICION ARAÑA --------- * #
