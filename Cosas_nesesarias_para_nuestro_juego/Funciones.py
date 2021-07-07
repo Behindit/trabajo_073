@@ -106,21 +106,21 @@ def ejecucion_juego(ventana):
     moey2=localizacion_enemigo2[1]
         
 # * ------- IMAGEN DE FONDO------- * #
-    background=[pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_0.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_1.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_2.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_3.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_4.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_5.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_6.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_7.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_8.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_9.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_10.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_11.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_12.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_13.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_14.png").convert_alpha()]
+    background=[pygame.image.load("MP_0.png").convert_alpha(),
+                pygame.image.load("MP_1.png").convert_alpha(),
+                pygame.image.load("MP_2.png").convert_alpha(),
+                pygame.image.load("MP_3.png").convert_alpha(),
+                pygame.image.load("MP_4.png").convert_alpha(),
+                pygame.image.load("MP_5.png").convert_alpha(),
+                pygame.image.load("MP_6.png").convert_alpha(),
+                pygame.image.load("MP_7.png").convert_alpha(),
+                pygame.image.load("MP_8.png").convert_alpha(),
+                pygame.image.load("MP_9.png").convert_alpha(),
+                pygame.image.load("MP_10.png").convert_alpha(),
+                pygame.image.load("MP_11.png").convert_alpha(),
+                pygame.image.load("MP_12.png").convert_alpha(),
+                pygame.image.load("MP_13.png").convert_alpha(),
+                pygame.image.load("MP_14.png").convert_alpha()]
     background[0] = pygame.transform.scale(background[0],(960,800))
     background[1] = pygame.transform.scale(background[1],(960,800))
     background[2] = pygame.transform.scale(background[2],(960,800))
@@ -138,42 +138,42 @@ def ejecucion_juego(ventana):
     background[14] = pygame.transform.scale(background[14],(960,800))
 
 # ? ------- ROCA ------- ? #
-    roca = pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/roca.png").convert_alpha()
+    roca = pygame.image.load("roca.png").convert_alpha()
     roca = pygame.transform.scale(roca,(70,60))
 
 # ?  ------- ROCA CON TELEARAÑA ------- ? #
-    roca2 = pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/RT1.png").convert_alpha()
+    roca2 = pygame.image.load("RT1.png").convert_alpha()
     roca2 = pygame.transform.scale(roca2,(70,60))
 
 # ? ------- ROCA OBSTACULO ------- ? #
-    rocaObs = pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Roca punta Sangre.png").convert_alpha()
+    rocaObs = pygame.image.load("Roca punta Sangre.png").convert_alpha()
     rocaObs = pygame.transform.scale(rocaObs,(70,60))
 
 # * ------- ARAÑA ------- * #
-    araña = [pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/ArañitaFinal_L.png").convert_alpha()
-            ,pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/ArañitaFinal_R.png").convert_alpha()]
+    araña = [pygame.image.load("ArañitaFinal_L.png").convert_alpha()
+            ,pygame.image.load("ArañitaFinal_R.png").convert_alpha()]
     araña[0] = pygame.transform.scale(araña[0],(45,45))
     araña[1] = pygame.transform.scale(araña[1],(45,45))
 
-    pokemon = [pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/SQ_L.png").convert_alpha()
-            ,pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/SQ_R.png").convert_alpha()]
+    pokemon = [pygame.image.load("SQ_L.png").convert_alpha()
+            ,pygame.image.load("SQ_R.png").convert_alpha()]
     pokemon[0] = pygame.transform.scale(pokemon[0],(50,50))
     pokemon[1] = pygame.transform.scale(pokemon[1],(50,50))
 
-    sapo = [pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Frog_L.png").convert_alpha()
-            ,pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Frog_R.png").convert_alpha()]
+    sapo = [pygame.image.load("Frog_L.png").convert_alpha()
+            ,pygame.image.load("Frog_R.png").convert_alpha()]
     sapo[0] = pygame.transform.scale(sapo[0],(50,50))
     sapo[1] = pygame.transform.scale(sapo[1],(50,50))
 
-    vida_T = pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Corazon_Vida.png").convert_alpha()
-    vida_F = pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Corazon_Vacio.png").convert_alpha()
+    vida_T = pygame.image.load("Corazon_Vida.png").convert_alpha()
+    vida_F = pygame.image.load("Corazon_Vacio.png").convert_alpha()
 
     # * ------- AQUI ES DONDE SE CARGA LA MUSICA DE FONDO ------- * #
-    pygame.mixer.music.load(os.path.dirname(os.path.abspath(__file__))+"\\Musica/mus_spider.wav")
+    pygame.mixer.music.load("mus_spider.wav")
     pygame.mixer.music.play(-1,0.0)
     pygame.mixer.music.set_volume(0.04)
 
-    Muerte = pygame.mixer.Sound(os.path.dirname(os.path.abspath(__file__))+"\\Sonidos/GolpeEnemigo.wav")
+    Muerte = pygame.mixer.Sound("GolpeEnemigo.wav")
     Muerte.set_volume(0.1)
 
 # * --------- FUNCION COLISIÓN --------- ! 

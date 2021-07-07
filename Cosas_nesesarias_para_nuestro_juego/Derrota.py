@@ -7,19 +7,19 @@ def Derrota(ventana,puntaje):
     f_muro = 0
     continuar=pygame.Rect(960-200,800-100,170,70)
     
-    pygame.mixer.music.load(os.path.dirname(os.path.abspath(__file__))+"\\Musica/DERROTA.wav")
+    pygame.mixer.music.load("DERROTA.wav")
     pygame.mixer.music.play(1,0.0)
     pygame.mixer.music.set_volume(0.08)
 
-    pokemon = [pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/SQ_L.png").convert_alpha()
-                ,pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/SQ_R.png").convert_alpha()]
+    pokemon = [pygame.image.load("SQ_L.png").convert_alpha()
+                ,pygame.image.load("SQ_R.png").convert_alpha()]
     pokemon[0] = pygame.transform.scale(pokemon[0],(252,249))
     pokemon[1] = pygame.transform.scale(pokemon[1],(252,249))
     pokemon[0] = pygame.transform.rotate(pokemon[0],-5)
     pokemon[1] = pygame.transform.rotate(pokemon[1],-5)
 
-    ranita = [pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Frog_L.png").convert_alpha()
-                ,pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Frog_R.png").convert_alpha()]
+    ranita = [pygame.image.load("Frog_L.png").convert_alpha()
+                ,pygame.image.load("Frog_R.png").convert_alpha()]
     ranita[0] = pygame.transform.scale(ranita[0],(252,249))
     ranita[1] = pygame.transform.scale(ranita[1],(252,249))
     ranita[0] = pygame.transform.rotate(ranita[0],-5)

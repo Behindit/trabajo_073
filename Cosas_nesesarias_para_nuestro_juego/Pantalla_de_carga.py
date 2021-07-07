@@ -8,16 +8,16 @@ def Pantalla_carga(ventana):
     fotograma = 0
     f_muro = 0
     tiempo=0
-    background=pygame.image.load((os.path.dirname(os.path.abspath(__file__))+"\\Background\P_CARGA.png"))
+    background=pygame.image.load(("P_CARGA.png"))
     background = pygame.transform.scale(background,(960,600))
-    cabeza=[pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites\C1.png").convert_alpha(),
-            pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites\C2.png").convert_alpha(),
-            pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites\C3.png").convert_alpha(),
-            pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites\C4.png").convert_alpha(),
-            pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites\C5.png").convert_alpha(),
-            pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites\C6.png").convert_alpha(),
-            pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites\C7.png").convert_alpha(),
-            pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites\C8.png").convert_alpha()]
+    cabeza=[pygame.image.load("C1.png").convert_alpha(),
+            pygame.image.load("C2.png").convert_alpha(),
+            pygame.image.load("C3.png").convert_alpha(),
+            pygame.image.load("C4.png").convert_alpha(),
+            pygame.image.load("C5.png").convert_alpha(),
+            pygame.image.load("C6.png").convert_alpha(),
+            pygame.image.load("C7.png").convert_alpha(),
+            pygame.image.load("C8.png").convert_alpha()]
     run=True
     while run:
         tiempo+=1

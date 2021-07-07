@@ -11,13 +11,13 @@ pygame.init()
 #ventana
 resolucion=[960,800]
 ventana=pygame.display.set_mode(resolucion)
-fondo=pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background/Cueva.jpg").convert()
+fondo=pygame.image.load("Cueva.jpg").convert()
 fondo=pygame.transform.scale(fondo,resolucion)
-titulo=pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Titulo_Juego.png").convert_alpha()
+titulo=pygame.image.load("Titulo_Juego.png").convert_alpha()
 titulo=pygame.transform.scale(titulo,[503,206])
 
 pygame.display.set_caption("SeVen Telarañas")
-icono=pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/cabeza_araña2.png").convert_alpha()
+icono=pygame.image.load("cabeza_araña2.png").convert_alpha()
 pygame.display.set_icon(icono)
 
 #colores

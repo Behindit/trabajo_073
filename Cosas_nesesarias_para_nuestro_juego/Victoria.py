@@ -20,12 +20,12 @@ def victoria(ventana,puntaje):
     fotograma = 0
     f_muro = 0
     continuar=pygame.Rect(960-200,800-100,170,70)
-    pygame.mixer.music.load(os.path.dirname(os.path.abspath(__file__))+"\\Musica/VICTORIA.wav")
+    pygame.mixer.music.load("VICTORIA.wav")
     pygame.mixer.music.play(1,0.0)
     pygame.mixer.music.set_volume(0.08)
 
-    araña_feliz = [pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Feliz_L.png").convert_alpha()
-                ,pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Feliz_R.png").convert_alpha()]
+    araña_feliz = [pygame.image.load("Feliz_L.png").convert_alpha()
+                ,pygame.image.load("Feliz_R.png").convert_alpha()]
     araña_feliz[0] = pygame.transform.scale(araña_feliz[0],(570,380))
     araña_feliz[1] = pygame.transform.scale(araña_feliz[1],(570,380))
     araña_feliz[0] = pygame.transform.rotate(araña_feliz[0],-5)
