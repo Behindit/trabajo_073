@@ -1,6 +1,7 @@
 import pygame,sys,random
 from Funciones import *
 from Funciones_enemigos import *
+from pygame import mixer
 
 pygame.init()
 
@@ -17,6 +18,10 @@ def victoria(ventana):
     fotograma = 0
     f_muro = 0
     continuar=pygame.Rect(960-200,800-100,170,70)
+
+    pygame.mixer.music.load(os.path.dirname(os.path.abspath(__file__))+"\\Musica/VICTORIA.wav")
+    pygame.mixer.music.play(1,0.0)
+    pygame.mixer.music.set_volume(0.08)
 
     araña_feliz = [pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Feliz_L.png").convert_alpha()
                 ,pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Feliz_R.png").convert_alpha()]

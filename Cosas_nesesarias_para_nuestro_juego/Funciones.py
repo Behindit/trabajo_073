@@ -1,6 +1,7 @@
 import pygame,sys,random,os
 from Funciones_enemigos import *
 from Victoria import *
+from Derrota import *
 
 #colores
 blanco=[255,255,255]
@@ -221,6 +222,7 @@ def ejecucion_juego(ventana):
             movx=0
             movy=0
             corazones-=1
+            Muerte.play()
 
         #corazones
         if corazones==0:
@@ -322,19 +324,13 @@ def ejecucion_juego(ventana):
         if final_final==2:
             pygame.mixer.music.stop()
             victoria(ventana)
-            ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33))
-            pygame.display.flip()
-            pygame.time.wait(5000)
             run=False
 
         if corazones==0:
             game_over+=1
         if game_over==2:
             pygame.mixer.music.stop()
-            escribir_texto_time(ventana,(ventana.get_width()/2,ventana.get_height()/2),"Perdiste",50)
-            ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33))
-            pygame.display.flip()
-            pygame.time.wait(5000)
+            Derrota(ventana)
             run=False
         ventana.blit(pokemon[xd],(lista1[moex][moey][0]+15,lista1[moex][moey][1]-39))
         ventana.blit(sapo[dx],(lista1[moex2][moey2][0]+15,lista1[moex2][moey2][1]-39))
