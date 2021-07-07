@@ -11,6 +11,10 @@ fondo=pygame.transform.scale(fondo,resolucion)
 titulo=pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/Titulo_Juego.png").convert_alpha()
 titulo=pygame.transform.scale(titulo,[503,206])
 
+pygame.display.set_caption("SeVen Telarañas")
+icono=pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/cabeza_araña2.png").convert_alpha()
+pygame.display.set_icon(icono)
+
 #colores
 blanco=[255,255,255]
 negro=[0,0,0]
@@ -41,9 +45,9 @@ while run:
             run=False
             
     #dibujar pantalla
-    crear_boton(ventana,jugar,"Jugar")
-    crear_boton(ventana,opciones,"Opciones")
-    crear_boton(ventana,extras,"Extras")
-    crear_boton(ventana,salir,"Salir")
+    crear_boton(ventana,jugar,"Jugar",30)
+    crear_boton(ventana,opciones,"Opciones",30)
+    crear_boton(ventana,extras,"Extras",30)
+    crear_boton(ventana,salir,"Salir",30)
     
     pygame.display.flip()

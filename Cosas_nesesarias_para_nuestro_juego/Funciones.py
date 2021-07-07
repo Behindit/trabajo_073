@@ -12,8 +12,8 @@ verdeazul=[0, 200, 70]
 ###Funciones###
 
 #crear boton
-def crear_boton(pantalla,boton,texto):
-    fuente1=pygame.font.SysFont("Times New Roman",30)
+def crear_boton(pantalla,boton,texto,tamaño):
+    fuente1=pygame.font.SysFont("Times New Roman",tamaño)
     if boton.collidepoint(pygame.mouse.get_pos()):
         pygame.draw.rect(pantalla,[225, 38, 180],boton,0)
     else:
@@ -61,6 +61,8 @@ def ejecucion_juego(ventana):
     movy=0
     corazones=3
     piñera_presidente=True
+    f_muro=0
+    fotograma=0
     generacion_final=[]
     igual=True
     igual2=True
@@ -75,8 +77,6 @@ def ejecucion_juego(ventana):
             x = 135 + (70*i)
             y = 120 + (60*j)
             lista1[i].append([x,y,0])
-
-    
 
 # * ------- OBSTACULOS ------- * #
     obstaculo_pos=[(random.randint(2,8)),(random.randint(2,8))]
@@ -123,8 +123,30 @@ def ejecucion_juego(ventana):
     moey2=localizacion_enemigo2[1]
         
 # * ------- IMAGEN DE FONDO------- * #
-    background = pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\Background.png").convert_alpha()
-    background = pygame.transform.scale(background,(960,800))
+    background=[pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_0.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_1.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_2.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_3.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_4.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_5.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_6.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_7.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_8.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_9.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_1.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_11.png").convert_alpha()]
+    background[0] = pygame.transform.scale(background[0],(960,800))
+    background[1] = pygame.transform.scale(background[1],(960,800))
+    background[2] = pygame.transform.scale(background[2],(960,800))
+    background[3] = pygame.transform.scale(background[3],(960,800))
+    background[4] = pygame.transform.scale(background[4],(960,800))
+    background[5] = pygame.transform.scale(background[5],(960,800))
+    background[6] = pygame.transform.scale(background[6],(960,800))
+    background[7] = pygame.transform.scale(background[7],(960,800))
+    background[8] = pygame.transform.scale(background[8],(960,800))
+    background[9] = pygame.transform.scale(background[9],(960,800))
+    background[10] = pygame.transform.scale(background[10],(960,800))
+    background[11] = pygame.transform.scale(background[11],(960,800))
 
 # ? ------- ROCA ------- ? #
     roca = pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/roca.png").convert_alpha()
@@ -173,11 +195,16 @@ def ejecucion_juego(ventana):
     while run:
     # * --------- IMAGEN DE FONDO --------- * #
         ventana.fill((132,130,128))
-        ventana.blit(background,[0,0])  
+        ventana.blit(background[fotograma],[0,0])  
+        f_muro+=1
+        if(f_muro==30):
+            fotograma+=1
+            f_muro=0
+        if(fotograma==12):
+            fotograma=0
 
         clock.tick(60)      
         
-    
     # * --------- TABLERO JUEGO --------- * #
         for c in lista1:
             for u in c:
@@ -220,7 +247,7 @@ def ejecucion_juego(ventana):
             if event.type==pygame.QUIT:
                 pygame.mixer.music.stop()
                 sys.exit()
-      
+    
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:# ! --------- SALIR DEL JUEGO --------- ! #
                     pygame.mixer.music.stop()
