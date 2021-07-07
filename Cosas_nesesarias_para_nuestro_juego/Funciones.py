@@ -31,9 +31,8 @@ def escribir_texto_time(pantalla,localizacion,texto,tamaño):
 
 #juego
 def ejecucion_juego(ventana):
-    final_final=0
     game_over=0
-    puntaje=1
+    puntaje=7
     pygame.init()
     lista1=[]
     movx=0
@@ -215,14 +214,14 @@ def ejecucion_juego(ventana):
             ventana.blit(vida_F,(815,10))
         else:
             if corazones==1:
-                ventana.blit(vida_F,(765,10))
-                ventana.blit(vida_F,(820,10))
+                ventana.blit(vida_F,(705,10))
+                ventana.blit(vida_F,(760,10))
                 ventana.blit(vida_T,(815,10))
             else:
                 if corazones==2:
-                    ventana.blit(vida_F,(765,10))
-                    ventana.blit(vida_T,(820,10))
-                    ventana.blit(vida_T,(875,10))
+                    ventana.blit(vida_F,(705,10))
+                    ventana.blit(vida_T,(760,10))
+                    ventana.blit(vida_T,(815,10))
                 else:
                     ventana.blit(vida_T,(705,10))
                     ventana.blit(vida_T,(760,10))
@@ -302,7 +301,7 @@ def ejecucion_juego(ventana):
                         movx+=0
                         v=1
         
-        if puntaje==652:
+        if puntaje==658:
             pygame.mixer.music.stop()
             victoria(ventana,puntaje)
             run=False

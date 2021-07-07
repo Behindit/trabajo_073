@@ -47,7 +47,8 @@ def victoria(ventana,puntaje):
             fotograma=0
         
         escribir_texto(ventana,[960/2,150],"¡VICTORIA!",100)
-        escribir_texto(ventana,[960/2,210],str(puntaje),50)
+        escribir_texto(ventana,[960/2+100,210],str(puntaje),50)
+        escribir_texto(ventana,[960/2-30,210],"Puntaje: ",50)
         ventana.blit(araña_feliz[fotograma],(10,800-475))    
         crear_boton(ventana,continuar,"Continuar",40)
         pygame.display.flip()
