@@ -1,4 +1,4 @@
-import pygame,sys,random
+import pygame,sys,random,os
 from Funciones import *
 # ! -------- INTEGRANTES -------- ! # 
 # ! Benjamin Godoy   21.266.064-7 ! #
