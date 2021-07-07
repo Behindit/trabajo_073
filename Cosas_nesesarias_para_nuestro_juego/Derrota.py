@@ -1,7 +1,5 @@
-import pygame,sys,random
+import pygame,sys,random,os
 from Funciones import *
-from Funciones_enemigos import *
-
 pygame.init()
 
 def crear_boton(pantalla,boton,texto,tamaño):
@@ -13,7 +11,7 @@ def crear_boton(pantalla,boton,texto,tamaño):
     ren=fuente1.render(texto,True,(255,255,255))
     pantalla.blit(ren,(boton.x+(boton.width-ren.get_width())/2,boton.y+(boton.height-ren.get_height())/2))
 
-def Derrota(ventana):
+def Derrota(ventana,puntaje):
     fotograma = 0
     f_muro = 0
     continuar=pygame.Rect(960-200,800-100,170,70)
@@ -53,6 +51,8 @@ def Derrota(ventana):
         if(fotograma==2):
             fotograma=0
         
+        escribir_texto(ventana,[960/2,150],"¡DERROTA!",100)
+        escribir_texto(ventana,[960/2,210],str(puntaje),50)
         ventana.blit(pokemon[fotograma],(10,800-300))    
         ventana.blit(ranita[fotograma],(310,800-300))  
         crear_boton(ventana,continuar,"Continuar",40)
