@@ -1,5 +1,4 @@
 import pygame,sys,random,os
-from Funciones import *
 
 #colores
 blanco=[255,255,255]
