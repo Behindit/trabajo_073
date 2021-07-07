@@ -24,7 +24,7 @@ def crear_boton(pantalla,boton,texto,tamaño):
     pantalla.blit(ren,(boton.x+(boton.width-ren.get_width())/2,boton.y+(boton.height-ren.get_height())/2))
 
 #imprime texto en pantalla
-def escribir_texto(pantalla,localizacion,texto,tamaño):
+def escribir_texto_time(pantalla,localizacion,texto,tamaño):
     fuente1=pygame.font.SysFont("Times New Roman",tamaño)
     ren2=fuente1.render(texto,True,(0,0,0))
     pantalla.blit(ren2,((localizacion[0]-(ren2.get_width()/2)),(localizacion[1]-(ren2.get_height()/2))))
@@ -311,13 +311,9 @@ def ejecucion_juego(ventana):
             pygame.mixer.music.stop()
             Derrota(ventana,puntaje)
             run=False
-<<<<<<< HEAD
 
         escribir_texto_time(ventana,[770,77],"Puntaje: ",40)
         escribir_texto_time(ventana,[850,77],str(puntaje),40)
-=======
-        escribir_texto(ventana,[895,200],str(puntaje),40)
->>>>>>> b725c0a9e288dcaf2b5a99d55b4ca844c477743a
         ventana.blit(pokemon[xd],(lista1[moex][moey][0]+15,lista1[moex][moey][1]-39))
         ventana.blit(sapo[dx],(lista1[moex2][moey2][0]+15,lista1[moex2][moey2][1]-39))
         ventana.blit(araña[v],(lista1[movx][movy][0]+18,lista1[movx][movy][1]-33)) # * --------- IMPRIME POSICION ARAÑA --------- * #
