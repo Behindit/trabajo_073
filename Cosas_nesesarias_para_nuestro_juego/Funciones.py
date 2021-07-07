@@ -135,8 +135,11 @@ def ejecucion_juego(ventana):
                 pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_7.png").convert_alpha(),
                 pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_8.png").convert_alpha(),
                 pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_9.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_1.png").convert_alpha(),
-                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_11.png").convert_alpha()]
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_10.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_11.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_12.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_13.png").convert_alpha(),
+                pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Background\MP_14.png").convert_alpha()]
     background[0] = pygame.transform.scale(background[0],(960,800))
     background[1] = pygame.transform.scale(background[1],(960,800))
     background[2] = pygame.transform.scale(background[2],(960,800))
@@ -149,6 +152,9 @@ def ejecucion_juego(ventana):
     background[9] = pygame.transform.scale(background[9],(960,800))
     background[10] = pygame.transform.scale(background[10],(960,800))
     background[11] = pygame.transform.scale(background[11],(960,800))
+    background[12] = pygame.transform.scale(background[12],(960,800))
+    background[13] = pygame.transform.scale(background[13],(960,800))
+    background[14] = pygame.transform.scale(background[14],(960,800))
 
 # ? ------- ROCA ------- ? #
     roca = pygame.image.load(os.path.dirname(os.path.abspath(__file__))+"\\Sprites/roca.png").convert_alpha()
@@ -199,10 +205,10 @@ def ejecucion_juego(ventana):
         ventana.fill((132,130,128))
         ventana.blit(background[fotograma],[0,0])  
         f_muro+=1
-        if(f_muro==30):
+        if(f_muro==10):
             fotograma+=1
             f_muro=0
-        if(fotograma==12):
+        if(fotograma==14):
             fotograma=0
 
         clock.tick(60)      
