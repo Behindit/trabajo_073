@@ -1,6 +1,11 @@
 import pygame,sys,random
 from Funciones import *
-
+# ! -------- INTEGRANTES -------- ! # 
+# ! Benjamin Godoy   21.266.064-7 ! #
+# ! Alan Molina      21.276.597-K ! #
+# ! Agustín Estrada  21.240.109-9 ! #
+# ! Fernando Inzulza 21.294.549-8 ! #
+# ! ----------------------------- ! #
 pygame.init()
 
 #ventana
